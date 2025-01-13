@@ -59,15 +59,21 @@ example : False → P := by
   done
 
 example : True → False → True → False → True → False := by
-  sorry
+  intro h1 h2 h3 h4 h5
+  assumption
   done
 
 example : P → (P → False) → False := by
-  sorry
+  intro hP hPF
+  apply hPF
+  assumption
   done
 
 example : (P → False) → P → Q := by
-  sorry
+  intro hPF hP
+  exfalso
+  apply hPF at hP
+  assumption
   done
 
 example : (True → False) → P := by
