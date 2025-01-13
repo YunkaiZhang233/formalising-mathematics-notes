@@ -38,9 +38,10 @@ and satisfying some axioms, and so on.
 -- We can also make our own expressions, and give them names
 def myFavouriteNumber : ℕ := 7
 
-def yourFavouriteNumber : ℕ := sorry
+def yourFavouriteNumber : ℕ := 42
 
 #check myFavouriteNumber
+#check yourFavouriteNumber
 
 -- or not give them a name
 example : ℕ := 2
@@ -79,7 +80,11 @@ example (a b : ℕ) : a + b = b + a := Nat.add_comm a b
 
 example (a b : ℕ) : a * b = b * a := Nat.mul_comm a b
 
-theorem my_proof : MyVeryEasyProposition := fun n => ⟨n, le_rfl⟩
+-- theorem my_proof : MyVeryEasyProposition := fun n => ⟨n, le_rfl⟩
+
+theorem my_proof:MyVeryEasyProposition := by
+  intro n
+  use n
 
 #check MyVeryEasyProposition
 #check my_proof
