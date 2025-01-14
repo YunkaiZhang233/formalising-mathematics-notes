@@ -32,11 +32,17 @@ example : P ∧ Q → P := by
   done
 
 example : P ∧ Q → Q := by
-  sorry
+  intro h
+  cases' h with hP hQ
+  exact hQ
   done
 
 example : (P → Q → R) → P ∧ Q → R := by
-  sorry
+  intro h1 h2
+  cases' h2 with hP hQ
+  apply h1 at hP
+  apply hP at hQ
+  exact hQ
   done
 
 example : P → Q → P ∧ Q := by
@@ -48,22 +54,34 @@ example : P → Q → P ∧ Q := by
 
 /-- `∧` is symmetric -/
 example : P ∧ Q → Q ∧ P := by
-  sorry
+  intro h
+  cases' h with hP hQ
+  constructor <;> assumption
   done
 
 example : P → P ∧ True := by
-  sorry
+  intro hP
+  constructor
+  · exact hP
+  · trivial
   done
 
 example : False → P ∧ False := by
-  sorry
+  intro hF
+  exfalso
+  assumption
   done
 
 /-- `∧` is transitive -/
 example : P ∧ Q → Q ∧ R → P ∧ R := by
-  sorry
+  intro hPQ hQR
+  cases' hPQ with hP _
+  cases' hQR with _ hR
+  constructor <;> assumption
   done
 
 example : (P ∧ Q → R) → P → Q → R := by
-  sorry
+  intro h1 hP hQ
+  apply h1
+  constructor <;> assumption
   done
