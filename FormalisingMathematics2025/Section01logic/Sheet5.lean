@@ -25,41 +25,77 @@ and also the following two new tactics:
 variable (P Q R S : Prop)
 
 example : P ↔ P := by
-  sorry
+  rfl
   done
 
 example : (P ↔ Q) → (Q ↔ P) := by
-  sorry
+  intro h
+  rw [h]
   done
 
 example : (P ↔ Q) ↔ (Q ↔ P) := by
-  sorry
+  constructor <;> intro h <;> rw [h]
   done
 
 example : (P ↔ Q) → (Q ↔ R) → (P ↔ R) := by
-  sorry
+  intro h1 h2
+  rw [← h1] at h2
+  exact h2
   done
 
 example : P ∧ Q ↔ Q ∧ P := by
-  sorry
+  constructor <;> intro h <;> cases' h with hP hQ <;> constructor <;> assumption
   done
 
+-- To Ask in the Labs
 example : (P ∧ Q) ∧ R ↔ P ∧ Q ∧ R := by
-  sorry
+  constructor <;> intro h <;> cases' h with h1 h2
+  · cases' h1 with ha hb
+    constructor
+    · assumption
+    · constructor <;> assumption
+  · cases' h2 with hc hd
+    constructor
+    · constructor <;> assumption
+    · assumption
   done
 
 example : P ↔ P ∧ True := by
-  sorry
+  constructor <;> intro h
+  · constructor
+    · assumption
+    · trivial
+  · cases' h with h1 h2
+    assumption
   done
 
 example : False ↔ P ∧ False := by
-  sorry
+  constructor <;> intro h <;> exfalso
+  · assumption
+  · cases' h with h1 h2
+    assumption
   done
 
 example : (P ↔ Q) → (R ↔ S) → (P ∧ R ↔ Q ∧ S) := by
-  sorry
+  intro h1 h2
+  rw [h1, h2]
   done
 
 example : ¬(P ↔ ¬P) := by
-  sorry
+  by_contra h
+  by_cases hP : P
+  -- P holds
+  · cases' h with h1 h2
+    have h' := hP
+    apply h1 at h'
+    change P → False at h'
+    apply h'
+    assumption
+  -- not P holds
+  · cases' h with h1 h2
+    have h' := hP
+    change P → False at h'
+    apply h'
+    apply h2
+    assumption
   done
