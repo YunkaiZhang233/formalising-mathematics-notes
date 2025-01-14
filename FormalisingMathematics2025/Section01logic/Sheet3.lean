@@ -69,8 +69,7 @@ example : False → ¬P := by
 example : P → ¬P → False := by
   intro hP hNP
   change P → False at hNP
-  apply hNP
-  by_cases P <;> assumption
+  by_cases P <;> apply hNP <;> assumption
   done
 
 example : P → ¬¬P := by
