@@ -74,21 +74,47 @@ example : P → ¬P → False := by
   done
 
 example : P → ¬¬P := by
-  sorry
+  intro hP
+  by_contra hnP
+  apply hnP
+  assumption
   done
 
 example : (P → Q) → ¬Q → ¬P := by
-  sorry
+  intro hPQ hnQ
+  change P → False
+  intro hP
+  apply hPQ at hP
+  apply hnQ at hP
+  assumption
   done
 
 example : ¬¬False → False := by
-  sorry
+  intro hnnF
+  by_contra hnF
+  change ¬False → False at hnnF
+  apply hnnF at hnF
+  exact hnF
   done
 
 example : ¬¬P → P := by
-  sorry
+  intro hnnP
+  change ¬P → False at hnnP
+  by_cases h : P
+  · exact h
+  · exfalso
+    apply hnnP
+    exact h
   done
 
 example : (¬Q → ¬P) → P → Q := by
-  sorry
+  intro hnQnP
+  intro hnP
+  by_cases hQ : Q
+  · assumption
+  · apply hnQnP at hQ
+    change P → False at hQ
+    exfalso
+    apply hQ
+    assumption
   done
