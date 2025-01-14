@@ -180,7 +180,9 @@ example (a b c : ℝ) : a * b * c = b * (a * c) := by
 
 -- Try these using rw.
 example (a b c : ℝ) : c * b * a = b * (a * c) := by
-  sorry
+  rw [mul_assoc c b a]
+  rw [mul_comm c (b * a)]
+  rw [← mul_assoc]
 
 -- Don't forget you can use ← to rewrite in the reverse direction!
 example (a b c : ℝ) : a * (b * c) = b * (a * c) := by
@@ -272,7 +274,9 @@ example : (a + b) * (a + b) = a * a + 2 * (a * b) + b * b :=
       sorry
     _ = a * a + 2 * (a * b) + b * b := by
       sorry
-
+-- (a + b) * (a + b) = a * a + b * a + (a * b + b * b)
+--                   = a * a + (b * a + a * b) + b * b
+--                   = a * a + 2 * (a * b) + b * b
 end
 
 -- Try these. For the second, use the theorems listed underneath.
