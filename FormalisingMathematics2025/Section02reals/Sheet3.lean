@@ -102,11 +102,18 @@ theorem tendsTo_add_const {a : ℕ → ℝ} {t : ℝ} (c : ℝ) (h : TendsTo a t
   -- a `forall` hypothesis to specific values.
   -- Look up the explanations of these tactics in Part 2
   -- of the course notes.  rw [tendsTo_def] at h ⊢
-  sorry
+  rw [tendsTo_def] at h ⊢
+  ring_nf
+  exact h
+  done
 
 -- you're not quite ready for this one yet though.
 /-- If `a(n)` tends to `t` then `-a(n)` tends to `-t`.  -/
 example {a : ℕ → ℝ} {t : ℝ} (ha : TendsTo a t) : TendsTo (fun n => -a n) (-t) := by
+  rw [tendsTo_def] at ha ⊢
+  intro ε h0
+  specialize ha ε h0
+  ring_nf
   sorry
 -- Try this one. You don't know enough material to do it yet!
 -- Where do you get stuck? The problem is that I didn't teach you
