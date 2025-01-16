@@ -114,6 +114,12 @@ example {a : ℕ → ℝ} {t : ℝ} (ha : TendsTo a t) : TendsTo (fun n => -a n)
   intro ε h0
   specialize ha ε h0
   ring_nf
+  cases' ha with b h
+  use b
+  intro n
+  intro hbn
+  specialize h n
+  apply h at hbn
   sorry
 -- Try this one. You don't know enough material to do it yet!
 -- Where do you get stuck? The problem is that I didn't teach you
@@ -124,3 +130,10 @@ example {a : ℕ → ℝ} {t : ℝ} (ha : TendsTo a t) : TendsTo (fun n => -a n)
 -- We'll come back to this example on sheet 5.
 
 end Section2sheet3
+
+/-
+Questions:
+
+1. Refactoring
+2. Specialize
+-/
