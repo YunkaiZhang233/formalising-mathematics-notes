@@ -66,10 +66,11 @@ example : G →* K :=
 -- The next three lemmas are pretty standard, but they are also in fact
 -- the axioms that show that groups form a category.
 theorem comp_id : φ.comp (MonoidHom.id G) = φ := by
-  sorry
+  ext g
+  simp
 
 theorem id_comp : (MonoidHom.id H).comp φ = φ := by
-  sorry
+  aesop?
 
 theorem comp_assoc {L : Type} [Group L] (ρ : K →* L) :
     (ρ.comp ψ).comp φ = ρ.comp (ψ.comp φ) := by
@@ -120,6 +121,8 @@ example (φ : G →* H) (S T : Subgroup H) (hST : S ≤ T) : S.comap φ ≤ T.co
 
 -- image preserves `≤` (i.e. if `S ≤ T` are subgroups of `G` then `φ(S) ≤ φ(T)`)
 example (φ : G →* H) (S T : Subgroup G) (hST : S ≤ T) : S.map φ ≤ T.map φ := by
+  intro g hg
+  simp only [Subgroup.mem_map] at hg ⊢
   sorry
 
 -- Pulling a subgroup back along one homomorphism and then another, is equal

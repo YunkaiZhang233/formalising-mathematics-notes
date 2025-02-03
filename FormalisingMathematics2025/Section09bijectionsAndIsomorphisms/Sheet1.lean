@@ -56,4 +56,18 @@ example : (∃ g : Y → X, f ∘ g = id ∧ g ∘ f = id) → f.Bijective := by
 -- `g`, and the `choose` tactic does this for you.
 -- If `hfs` is a proof that `f` is surjective, try `choose g hg using hfs`.
 example : f.Bijective → ∃ g : Y → X, f ∘ g = id ∧ g ∘ f = id := by
-  sorry
+  intro hf
+  rw [Function.Bijective, Function.Injective, Function.Surjective] at hf
+  obtain ⟨hf_inj, hf_surj⟩ := hf
+  -- choose tactic: take hypothesis of a bunch forall a
+  -- skolemization
+  choose g hg using hf_surj
+  use g
+  constructor
+  · ext y
+    simp
+    simp [hg]
+  · ext x
+    simp only [Function.comp_apply, id_eq]
+    apply hf_inj
+    rw [hg]
