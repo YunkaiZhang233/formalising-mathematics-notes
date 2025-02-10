@@ -109,7 +109,7 @@ naturals (e.g. 2-3=0 and 5/2=2 in the naturals, as they are forced to return a n
 
 open BigOperators -- enable ∑ notation
 
-example (n : ℕ) : ∑ i in Finset.range n, (i : ℚ) ^ 2 = (n : ℚ) * (n - 1) * (2 * n - 1) / 6 := by
+example (n : ℕ) : ∑ i ∈ Finset.range n, (i : ℚ) ^ 2 = (n : ℚ) * (n - 1) * (2 * n - 1) / 6 := by
   -- induction on `n`.
   induction' n with d hd
   · -- base case `n = 0` will follow by rewriting lemmas such as `∑ i in finset.range 0 f(i) = 0`
@@ -132,4 +132,12 @@ example (n : ℕ) : ∑ i in Finset.range n, (i : ℚ) ^ 2 = (n : ℚ) * (n - 1)
 
 -- See if you can can sum the first n cubes.
 example (n : ℕ) : ∑ i in Finset.range n, (i : ℚ) ^ 3 = (n : ℚ) ^ 2 * (n - 1) ^ 2 / 4 := by
+  sorry
+
+-- bind = biunion
+
+
+example (P Q R S : Prop) (h1 : R ↔ S) (h2 : ¬ ((P → Q ∨ ¬ S) ∧ (S ∨ P → ¬ Q) → (S → Q)) ↔ (P ∧ Q ∧ ¬ S)) :
+    ¬ ((P → Q ∨ ¬ R) ∧ (R ∨ P → ¬ Q) → (R → Q)) ↔ P ∧ Q ∧ ¬ R := by
+
   sorry

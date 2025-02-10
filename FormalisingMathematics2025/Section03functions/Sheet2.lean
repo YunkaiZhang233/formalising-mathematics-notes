@@ -75,7 +75,10 @@ example : Injective (id : X → X) := by
   -- you can start with `rw injective_def` if you like,
   -- and later you can `rw id_eval`, although remember that `rw` doesn't
   -- work under binders like `∀`, so use `intro` first.
-  sorry
+  intro a b
+  simp only [id_eval]
+  intro x
+  apply x
 
 example : Surjective (id : X → X) := by
   sorry
