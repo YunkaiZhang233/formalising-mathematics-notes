@@ -54,7 +54,7 @@ example : (∃ g : Y → X, f ∘ g = id ∧ g ∘ f = id) → f.Bijective := by
 -- tactic. Given `f` and a proof that it's a bijection, how do you
 -- prove the existence of a two-sided inverse `g`? You'll have to construct
 -- `g`, and the `choose` tactic does this for you.
--- If `hfs` is a proof that `f` is surjective, try `choose g hg using hfs`.
+-- If `hf_surj` is a proof that `f` is surjective, try `choose g hg using hf_surj`.
 example : f.Bijective → ∃ g : Y → X, f ∘ g = id ∧ g ∘ f = id := by
   intro hf
   rw [Function.Bijective, Function.Injective, Function.Surjective] at hf
